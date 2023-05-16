@@ -30,7 +30,8 @@ public:
 		wnd.GetClientRect((LPRECT)this);
 	}
 };
-
+// thanks to http://www.viksoe.dk/code/index.htm for this class
+// changed to use CMemoryDC which is part of WTL
 // To use it, derive from it and chain it in the message map.
 template< class T >
 class COffscreenDraw
