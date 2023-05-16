@@ -31,6 +31,8 @@ public:
 	}
 };
 
+// thanks to http://www.viksoe.dk/code/index.htm for this class
+// modified to use WTL's CMemoryDC
 // To use it, derive from it and chain it in the message map.
 template< class T >
 class COffscreenDraw
