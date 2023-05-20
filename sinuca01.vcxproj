@@ -199,6 +199,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="COptionsDlg.cpp" />
     <ClCompile Include="maindlg.cpp" />
     <ClCompile Include="sinuca01.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -212,10 +213,19 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="COptionsDlg.h" />
     <ClInclude Include="maindlg.h" />
+    <ClInclude Include="NO5TL\Color.h" />
+    <ClInclude Include="NO5TL\IniFile.h" />
+    <ClInclude Include="NO5TL\MyString.h" />
+    <ClInclude Include="NO5TL\Vector.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="viksoe\PropertyItem.h" />
+    <ClInclude Include="viksoe\PropertyItemEditors.h" />
+    <ClInclude Include="viksoe\PropertyItemImpl.h" />
+    <ClInclude Include="viksoe\PropertyList.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="sinuca01.rc" />

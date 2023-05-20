@@ -21,8 +21,9 @@ extern CAppModule _Module;
 #include <atlgdi.h>
 #include <atlstr.h>
 #include <atlctrls.h>
-
+#include <atlpath.h>
 #include "./NO5TL/Vector.h"
+#include "./NO5TL/MyString.h"
 
 
 #if defined _M_IX86

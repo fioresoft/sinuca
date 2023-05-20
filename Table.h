@@ -95,6 +95,7 @@ public:
 		COMMAND_ID_HANDLER(IDC_BUTTON3, OnButton3)
 		COMMAND_ID_HANDLER(IDC_BUTTON4, OnStartSinuca)
 		COMMAND_ID_HANDLER(IDC_BUTTON5, OnStartRandom)
+		COMMAND_ID_HANDLER(IDC_OPTIONS, OnOptions)
 		CHAIN_MSG_MAP(COffscreenDraw<CTable>)
 	END_MSG_MAP()
 
@@ -111,6 +112,7 @@ public:
 	LRESULT OnButton3(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnStartSinuca(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnStartRandom(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+	LRESULT OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	void DoPaint(CDCHandle dc);
 	
 private:

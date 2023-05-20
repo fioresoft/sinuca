@@ -13,6 +13,12 @@
       <UniqueIdentifier>{188a5094-21ea-4fe6-a307-24bcea269b4b}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
     </Filter>
+    <Filter Include="Header Files\NO5TL">
+      <UniqueIdentifier>{45396c7a-cb01-4be2-a575-e3fc989aadc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\viksoe">
+      <UniqueIdentifier>{56b2e82e-2fe7-4c3a-9f33-1a9e5eb93c99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -28,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="maindlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COptionsDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,6 +58,33 @@
     </ClInclude>
     <ClInclude Include="maindlg.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="COptionsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NO5TL\Color.h">
+      <Filter>Header Files\NO5TL</Filter>
+    </ClInclude>
+    <ClInclude Include="NO5TL\IniFile.h">
+      <Filter>Header Files\NO5TL</Filter>
+    </ClInclude>
+    <ClInclude Include="NO5TL\MyString.h">
+      <Filter>Header Files\NO5TL</Filter>
+    </ClInclude>
+    <ClInclude Include="NO5TL\Vector.h">
+      <Filter>Header Files\NO5TL</Filter>
+    </ClInclude>
+    <ClInclude Include="viksoe\PropertyItem.h">
+      <Filter>Header Files\viksoe</Filter>
+    </ClInclude>
+    <ClInclude Include="viksoe\PropertyItemEditors.h">
+      <Filter>Header Files\viksoe</Filter>
+    </ClInclude>
+    <ClInclude Include="viksoe\PropertyItemImpl.h">
+      <Filter>Header Files\viksoe</Filter>
+    </ClInclude>
+    <ClInclude Include="viksoe\PropertyList.h">
+      <Filter>Header Files\viksoe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@
 #include "./NO5TL/Color.h"
 #include "Table.h"
 #include "ball.h"
+#include "COptionsDlg.h"
+#include "NO5TL/IniFile.h"
 
 enum {
 	BALL_WHITE = 0,
@@ -52,6 +54,22 @@ CTable::CTable():m_cBalls(8),m_dt(100),m_cHoles(6)
 	m_holes = new CHole[m_cHoles];
 	m_alfa = 0;
 	m_bInit = true;
+	// options
+	TCHAR  path[MAX_PATH] = { 0 };
+	::GetModuleFileName(_Module.GetModuleInstance(), path, MAX_PATH);
+	CPath p(path);
+	p.RemoveFileSpec();
+	p.AddBackslash();
+	p.Append(_T("sinuca.ini"));
+	NO5TL::CPrivateIniFile ini(p);
+	CString s = ini.GetString(_T("behaviour"), _T("friction"), _T("10"), 10);
+	CBall::m_friction = _ttol(s);
+	if (CBall::m_friction == 0)
+		CBall::m_friction = 10;
+	s = ini.GetString(_T("behaviour"), _T("wall_friction"), _T("20"), 10);
+	CBall::m_wall_friction = _ttol(s);
+	if (CBall::m_wall_friction == 0)
+		CBall::m_wall_friction = 20;
 }
 
 CTable::~CTable()
@@ -329,6 +347,35 @@ LRESULT CTable::OnStartSinuca(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
 LRESULT CTable::OnStartRandom(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	SetGameType(GAME_RANDOM);
+	return 0;
+}
+
+LRESULT CTable::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	COptionsDlg dlg;
+
+	dlg.m_friction = CBall::m_friction;
+	dlg.m_wall_friction = CBall::m_wall_friction;
+	INT_PTR res = dlg.DoModal(GetParent());
+	
+	if (res == IDOK) {
+		TCHAR path[MAX_PATH] = { 0 };
+		CComVariant v;
+		CBall::m_wall_friction = dlg.m_wall_friction;
+		CBall::m_friction = dlg.m_friction;
+		::GetModuleFileName(_Module.GetModuleInstance(), path, MAX_PATH);
+		CPath p(path);
+		p.RemoveFileSpec();
+		p.AddBackslash();
+		p.Append(_T("sinuca.ini"));
+		NO5TL::CPrivateIniFile ini(p);
+
+		BOOL r = ini.WriteInt(_T("behaviour"), _T("friction"), CBall::m_friction);
+		if (r) {
+			r = ini.WriteInt(_T("behaviour"), _T("wall_friction"), CBall::m_wall_friction);
+		}
+		ATLASSERT(r);
+	}
 	return 0;
 }
 
