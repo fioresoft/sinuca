@@ -19,7 +19,6 @@ CBall::CBall()
 	m_gone = false;
 	m_id = -1;
 	m_drawcue = false; 
-	m_r = 0;
 	m_ghost = false;
 	m_hWnd = NULL;
 	m_bDrawGhostVel = false;
@@ -94,7 +93,7 @@ void CBall::SetBox(const CRect &r)
 	Bounce();
 }
 
-void CBall::create(int id,int r,COLORREF clr,HWND hWnd)
+void CBall::create(int id,COLORREF clr,HWND hWnd)
 {
 	CClientDC dc(hWnd);
 	CDC dcmem;
@@ -113,34 +112,33 @@ void CBall::create(int id,int r,COLORREF clr,HWND hWnd)
 
 	dcmem.CreateCompatibleDC(dc);
 	ATLASSERT(!dcmem.IsNull());
-	m_bmp.CreateCompatibleBitmap(dc,2 * r,2 * r);
-	m_r = ball_type(r);
+	m_bmp.CreateCompatibleBitmap(dc,2 * m_r,2 * m_r);
 	hBmp1 = dcmem.SelectBitmap(m_bmp);
 	// draws a black rectangle with black borders
 	hpen = dcmem.SelectPen((HPEN)GetStockObject(BLACK_PEN));
 	hbr = dcmem.SelectBrush((HBRUSH)GetStockObject(BLACK_BRUSH));
-	dcmem.Rectangle(0,0,2*r ,2*r );
+	dcmem.Rectangle(0,0,2* m_r,2* m_r);
 	dcmem.SelectBrush(hbr);
 	dcmem.SelectPen(hpen);
 	// draws a circle with black pen and clr brush
 	br.CreateSolidBrush(clr);
 	hbr = dcmem.SelectBrush(br);
 	hpen = dcmem.SelectPen((HPEN)GetStockObject(BLACK_PEN));
-	dcmem.Ellipse(0,0,2 * r - 1,2 * r - 1);
+	dcmem.Ellipse(0,0,2 * m_r - 1,2 * m_r - 1);
 	dcmem.SelectBrush(hbr);
 	dcmem.SelectPen(hpen);
 
 	// create mask bitmap
 	if (!m_bmpMask.IsNull())
 		m_bmpMask.DeleteObject();
-	m_bmpMask.CreateCompatibleBitmap(dc,2 * r,2 * r);
+	m_bmpMask.CreateCompatibleBitmap(dc,2 * m_r,2 * m_r);
 	hBmp2 = dcmem.SelectBitmap(m_bmpMask);
 	hpen = dcmem.SelectPen((HPEN)GetStockObject(WHITE_PEN));
 	hbr = dcmem.SelectBrush((HBRUSH)GetStockObject(WHITE_BRUSH));
-	dcmem.Rectangle(0,0, 2 * r, 2 * r);
+	dcmem.Rectangle(0,0, 2 * m_r, 2 * m_r);
 	dcmem.SelectPen((HPEN)GetStockObject(BLACK_PEN));
 	dcmem.SelectBrush((HBRUSH)GetStockObject(BLACK_BRUSH));
-	dcmem.Ellipse(0,0,2 * r - 1, 2 * r - 1);
+	dcmem.Ellipse(0,0,2 * m_r - 1, 2 * m_r - 1);
 	dcmem.SelectBrush(hbr);
 	dcmem.SelectPen(hpen);
 	dcmem.SelectBitmap(hBmp1);

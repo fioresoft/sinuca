@@ -21,7 +21,7 @@ public:
 	Vector m_v;
 	Vector m_a;
 	Vector m_cue;
-	ball_type m_r;
+	static LONG m_r;
 	bool m_gone;
 	static int m_friction;	// %
 	static int m_wall_friction;	// %
@@ -41,7 +41,7 @@ public:
 	void SetBox(const CRect &r);
 	bool Bounce(void);
 	void Move(UINT dt);
-	void create(int id,int r,COLORREF clr,HWND hWnd);
+	void create(int id,COLORREF clr,HWND hWnd);
 	void draw(HDC hdc);
 	void erase(HDC hdc);
 	void GetRect(CRect &r) const;

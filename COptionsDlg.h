@@ -6,6 +6,10 @@ class COptionsDlg :
 public:
     LONG m_wall_friction;
     LONG m_friction;
+    ball_type m_r;
+    ball_type m_HoleRadius;
+    HPROPERTY m_hr;
+    HPROPERTY m_hHoleRadius;
     HPROPERTY m_hWallFriction;
     HPROPERTY m_hFriction;
     CPropertyListCtrl m_list;

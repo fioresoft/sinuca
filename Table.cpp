@@ -33,6 +33,7 @@ public:
 LONG CHole::m_r = 0;
 int CBall::m_friction = 10;	// 5
 int CBall::m_wall_friction = 20; // 15
+LONG CBall::m_r = 10;
 
 
 	
@@ -70,6 +71,14 @@ CTable::CTable():m_cBalls(8),m_dt(100),m_cHoles(6)
 	CBall::m_wall_friction = _ttol(s);
 	if (CBall::m_wall_friction == 0)
 		CBall::m_wall_friction = 20;
+	s = ini.GetString(_T("appearance"), _T("ball_radius"), _T("10"), 10);
+	CBall::m_r = _ttol(s);
+	if (CBall::m_r == 0)
+		CBall::m_r = 10;
+	s = ini.GetString(_T("appearance"), _T("hole_radius"), _T("25"), 10);
+	CHole::m_r = _ttol(s);
+	if (CHole::m_r == 0)
+		CHole::m_r = 25;
 }
 
 CTable::~CTable()
@@ -356,13 +365,16 @@ LRESULT CTable::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, 
 
 	dlg.m_friction = CBall::m_friction;
 	dlg.m_wall_friction = CBall::m_wall_friction;
+	dlg.m_r = CBall::m_r;
+	dlg.m_HoleRadius = CHole::m_r;
 	INT_PTR res = dlg.DoModal(GetParent());
 	
 	if (res == IDOK) {
 		TCHAR path[MAX_PATH] = { 0 };
-		CComVariant v;
 		CBall::m_wall_friction = dlg.m_wall_friction;
 		CBall::m_friction = dlg.m_friction;
+		CBall::m_r = dlg.m_r;
+		CHole::m_r = dlg.m_HoleRadius;
 		::GetModuleFileName(_Module.GetModuleInstance(), path, MAX_PATH);
 		CPath p(path);
 		p.RemoveFileSpec();
@@ -373,6 +385,12 @@ LRESULT CTable::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, 
 		BOOL r = ini.WriteInt(_T("behaviour"), _T("friction"), CBall::m_friction);
 		if (r) {
 			r = ini.WriteInt(_T("behaviour"), _T("wall_friction"), CBall::m_wall_friction);
+			if (r) {
+				r = ini.WriteInt(_T("appearance"), _T("ball_radius"), CBall::m_r);
+				if (r) {
+					r = ini.WriteInt(_T("appearance"), _T("hole_radius"), CHole::m_r);
+				}
+			}
 		}
 		ATLASSERT(r);
 	}
@@ -412,7 +430,7 @@ void CTable::InitBalls(const CRect &r)
 	srand((unsigned int)GetTickCount64());
 	
 	for(int i=0;i<m_cBalls;i++){
-		m_balls[i].create(i,10,color.Random(),m_hWnd);
+		m_balls[i].create(i,color.Random(),m_hWnd);
 		m_balls[i].SetBox(r);
 		m_balls[i].m_p.x = (ball_type)20 + ( i + 1 ) * 30;
 		m_balls[i].m_p.y = (ball_type)20 + ( i + 1 ) * 15;
@@ -436,7 +454,7 @@ void CTable::InitBallsSinuca(const CRect& r)
 
 	ATLASSERT(m_cBalls == 8);
 	for (int i = 0; i < 8; i++) {
-		m_balls[i].create(BALL_WHITE + i, 10, colors[i], m_hWnd);
+		m_balls[i].create(BALL_WHITE + i, colors[i], m_hWnd);
 		m_balls[i].SetBox(r);
 		m_balls[i].m_gone = false;
 		
