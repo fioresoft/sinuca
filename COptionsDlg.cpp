@@ -57,6 +57,6 @@ LRESULT COptionsDlg::OnOk(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, 
 
 LRESULT COptionsDlg::OnCancel(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    EndDialog(IDOK);
+    EndDialog(IDCANCEL);
     return 0;
 }
